@@ -5,7 +5,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-
 " The following are examples of different formats supported.
 " " Keep Plugin commands between vundle#begin/end.
 " " plugin on GitHub repo
@@ -21,17 +20,29 @@ Plugin 'gmarik/Vundle.vim'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " " Avoid a name conflict with L9
 " Plugin 'user/L9', {'name': 'newL9'}
+Plugin 'L9'
+Plugin 'FuzzyFinder'
+Plugin 'airblade/FuzzyFinder_Textmate'
+Plugin 'scrooloose/nerdtree'
+Plugin 'mileszs/ack.vim'
 
 call vundle#end()
 
 
 filetype plugin indent on
-set nu
+" set nu
 syntax on
-set showtabline=2
+" set showtabline=2
 " execute pathogen#infect()
 set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+" set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set hlsearch
 set incsearch
 set wildmode=list:longest
+
+set title
+
+map <leader>t :FuzzyFinderTextMate<Enter>
+set ruler
+set laststatus=2
+set scrolloff=3
