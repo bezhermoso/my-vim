@@ -25,24 +25,35 @@ Plugin 'FuzzyFinder'
 Plugin 'airblade/FuzzyFinder_Textmate'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mileszs/ack.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'chriskempson/base16-vim'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 call vundle#end()
 
-
 filetype plugin indent on
-" set nu
 syntax on
-" set showtabline=2
-" execute pathogen#infect()
-set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-" set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+set showtabline=2
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set hlsearch
 set incsearch
 set wildmode=list:longest
-
+set number
 set title
 
-map <leader>t :FuzzyFinderTextMate<Enter>
+" map <leader>f :FuzzyFinderTextMate<Enter>
+map <leader>t :NERDTreeToggle<cr>
 set ruler
 set laststatus=2
 set scrolloff=3
+
+" powerline-status setup
+set guioptions-=T
+set guioptions-=r
+set go-=L
+set linespace=12
+set showmode
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+set visualbell
