@@ -57,7 +57,7 @@ python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
 set visualbell
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable 
+set foldlevel=1 
