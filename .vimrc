@@ -28,6 +28,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()
 
@@ -60,4 +62,12 @@ set visualbell
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable 
-set foldlevel=1 
+set foldlevel=1
+
+set shell=bash\ --login
+
+" Unmap arrow keys in normal mode
+no <up> <Nop>
+no <down> <Nop>
+no <left> <Nop>
+no <right> <Nop>
