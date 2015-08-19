@@ -8,11 +8,11 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " " Keep Plugin commands between vundle#begin/end.
 " " plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'git://git.wincent.com/command-t.git'
 " " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -30,9 +30,11 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'bling/vim-airline'
 
 call vundle#end()
 
+let mapleader=","
 filetype plugin indent on
 syntax on
 set showtabline=2
@@ -42,9 +44,11 @@ set incsearch
 set wildmode=list:longest
 set number
 set title
+nohl
 
 " map <leader>f :FuzzyFinderTextMate<Enter>
-map <leader>t :NERDTreeToggle<cr>
+map <leader>n :NERDTreeToggle<cr>
+map <leader>m :CommandT<cr>
 set ruler
 set laststatus=2
 set scrolloff=3
@@ -52,6 +56,7 @@ set scrolloff=3
 " powerline-status setup
 set guioptions-=T
 set guioptions-=r
+hi Search ctermfg=0 ctermbg=11 guifg=Black 
 set go-=L
 set linespace=12
 set showmode
@@ -67,7 +72,37 @@ set foldlevel=1
 set shell=bash\ --login
 
 " Unmap arrow keys in normal mode
-no <up> <Nop>
-no <down> <Nop>
-no <left> <Nop>
-no <right> <Nop>
+nnoremap <up> :m-2<CR>
+nnoremap <down> :m+1<CR>
+nnoremap <left> <Nop>
+nnoremap <right> <Nop>
+
+" Unmap mouse scrolls
+"nnoremap <ScrollWheelUp> <nop>
+"noremap <S-ScrollWheelUp> <nop>
+"nnoremap <C-ScrollWheelUp> <nop>
+"nnoremap <ScrollWheelDown> <nop>
+"nnoremap <S-ScrollWheelDown> <nop>
+"nnoremap <C-ScrollWheelDown> <nop>
+"nnoremap <ScrollWheelLeft> <nop>
+"nnoremap <S-ScrollWheelLeft> <nop>
+"nnoremap <C-ScrollWheelLeft> <nop>
+"nnoremap <ScrollWheelRight> <nop>
+"nnoremap <S-ScrollWheelRight> <nop>
+"nnoremap <C-ScrollWheelRight> <nop>
+
+" Tabbing on normal and visual modes
+nnoremap <S-Tab> :tabnext<CR>
+nnoremap <C-S-Tab> :tabprevious<CR>
+inoremap <C-Tab> <ESC>:tabprevious<CR>
+vnoremap <S-Tab> :tabnext<CR>
+vnoremap <C-S-Tab> :tabprevious<CR>
+
+" Common wraps
+inoremap <leader>' ''<ESC>i
+inoremap <leader>( ()<ESC>i
+inoremap <leader>" ""<ESC>i
+inoremap <leader>{ {}<ESC>i
+inoremap <leader>[ []<ESC>i
+let g:CommandTHighlightColor = "IncSearch"
+let g:CommandTMaxHeight = 15 
