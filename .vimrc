@@ -1,5 +1,5 @@
 set nocompatible
-filetype off
+filetype plugin indent on 
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -31,6 +31,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'bling/vim-airline'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 
@@ -56,7 +57,8 @@ set scrolloff=3
 " powerline-status setup
 set guioptions-=T
 set guioptions-=r
-hi Search ctermfg=0 ctermbg=11 guifg=Black 
+"hi Search ctermfg=0 ctermbg=11 guifg=Black 
+" hi LineNr ctermfg=238
 set go-=L
 set linespace=12
 set showmode
@@ -68,7 +70,7 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable 
 set foldlevel=1
-
+set ttimeoutlen=50
 set shell=bash\ --login
 
 " Unmap arrow keys in normal mode
@@ -106,3 +108,21 @@ inoremap <leader>{ {}<ESC>i
 inoremap <leader>[ []<ESC>i
 let g:CommandTHighlightColor = "IncSearch"
 let g:CommandTMaxHeight = 15 
+
+" Map backspace to delete line without overwriting pasteboard
+nnoremap <BS> "_dd
+vnoremap <BS> "_dd
+
+" Toggle `set list`
+nmap <leader>l :set list!<CR>
+set listchars=tab:▸\ ,eol:¬
+
+" Toggle between relative & absolute file number
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<CR>
