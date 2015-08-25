@@ -94,7 +94,7 @@ set splitright
 set cursorline
 set ttyfast
 set undofile
-set ignorecase
+" set ignorecase
 set smartcase
 
 
