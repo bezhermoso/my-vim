@@ -127,18 +127,18 @@ set formatoptions=qrn1
 set colorcolumn=80
 
 " Unmap mouse scrolls
-"nnoremap <ScrollWheelUp> <nop>
-"noremap <S-ScrollWheelUp> <nop>
-"nnoremap <C-ScrollWheelUp> <nop>
-"nnoremap <ScrollWheelDown> <nop>
-"nnoremap <S-ScrollWheelDown> <nop>
-"nnoremap <C-ScrollWheelDown> <nop>
-"nnoremap <ScrollWheelLeft> <nop>
-"nnoremap <S-ScrollWheelLeft> <nop>
-"nnoremap <C-ScrollWheelLeft> <nop>
-"nnoremap <ScrollWheelRight> <nop>
-"nnoremap <S-ScrollWheelRight> <nop>
-"nnoremap <C-ScrollWheelRight> <nop>
+nnoremap <ScrollWheelUp> <Nop>
+nnoremap <S-ScrollWheelUp> <Nop>
+nnoremap <C-ScrollWheelUp> <Nop>
+nnoremap <ScrollWheelDown> <Nop>
+nnoremap <S-ScrollWheelDown> <Nop>
+nnoremap <C-ScrollWheelDown> <Nop>
+nnoremap <ScrollWheelLeft> <Nop>
+nnoremap <S-ScrollWheelLeft> <Nop>
+nnoremap <C-ScrollWheelLeft> <Nop>
+nnoremap <ScrollWheelRight> <Nop>
+nnoremap <S-ScrollWheelRight> <Nop>
+nnoremap <C-ScrollWheelRight> <Nop>
 
 " Tabbing on normal and visual modes
 nnoremap <S-Tab> :tabnext<CR>
@@ -157,13 +157,17 @@ inoremap <leader>( ()<ESC>i
 inoremap <leader>" ""<ESC>i
 inoremap <leader>{ {}<ESC>i
 inoremap <leader>[ []<ESC>i
-let g:CommandTHighlightColor = "IncSearch"
 let g:CommandTMaxHeight = 15 
+let g:CommandTHighlightColor = "IncSearch"
 
 " Highlight colors 
 hi Search ctermfg=0 ctermbg=11 guifg=Black 
 hi LineNr ctermfg=242
 hi ColorColumn ctermbg=242
+hi CursorLine cterm=NONE ctermbg=black
+
+" Toggle cursorline
+nnoremap <Leader>h :set cursorline!<CR>
 
 " Map backspace to delete line without overwriting pasteboard
 nnoremap <BS> "_dd
@@ -196,3 +200,10 @@ nnoremap Q !!bash
 
 " Save when vim buffer lose focus
 au FocusLost * :wa
+
+" Activate cursor line on current buffer only
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
