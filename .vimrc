@@ -20,7 +20,7 @@ Plugin 'tpope/vim-fugitive'
 " " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'git://git.wincent.com/command-t.git'
 " " git repos on your local machine (i.e. when working on your own plugin)
 " Plugin 'file:///home/gmarik/path/to/plugin'
 " " The sparkup vim script is in a subdirectory of this repo called vim.
@@ -40,7 +40,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'bling/vim-airline'
 Plugin 'powerline/powerline'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloricw/YouCompleteMe'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'guns/xterm-color-table.vim'
 Plugin 'tpope/vim-surround'
@@ -49,7 +49,11 @@ Plugin 'unblevable/quick-scope'
 Plugin 'lsdr/monokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'rking/ag.vim'
-
+Plugin 'tpope/vim-endwise'
+Plugin 'mattn/flappyvird-vim'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'vim-scripts/ZoomWin'
 
 call vundle#end()
 
@@ -124,6 +128,8 @@ nnoremap / /\v
 vnoremap / /\v
 nnoremap ? ?\v
 vnoremap ? ?\v
+nnoremap <leader>s <esc>:%s/\v
+vnoremap <leader>s <esc>:%s/\v
 
 " Clear search
 nnoremap <leader><space> :noh<cr>
@@ -158,9 +164,10 @@ inoremap <C-Tab> <ESC>:tabprevious<CR>
 vnoremap <S-Tab> :tabnext<CR>
 vnoremap <C-S-Tab> :tabprevious<CR>
 
-nnoremap <leader>n :NERDTreeToggle<cr>
-nnoremap <leader>m :CtrlPBuffer<cr>
-nnoremap <leader>a :Ack
+nnoremap <leader>m :NERDTreeToggle<cr>
+nnoremap <leader>n :CtrlP<cr>
+nnoremap <leader>N :CtrlPMRUFiles<cr>
+nnoremap <leader>a :Ag
 
 " Common wraps
 inoremap <leader>' ''<ESC>i
@@ -168,8 +175,8 @@ inoremap <leader>( ()<ESC>i
 inoremap <leader>" ""<ESC>i
 inoremap <leader>{ {}<ESC>i
 inoremap <leader>[ []<ESC>i
-let g:CommandTMaxHeight = 15 
-let g:CommandTHighlightColor = "Visual"
+"let g:CommandTMaxHeight = 15 
+"let g:CommandTHighlightColor = "Visual"
 
 " Highlight colors 
 "hi Search ctermfg=0 ctermbg=11 guifg=Black 
@@ -301,3 +308,7 @@ if exists("+undofile")
   set undodir+=~/.vim/undo//
   set undofile
 endif
+
+" Ident entire file. Uses 'i' as mark so that it goes back to the current line.
+nnoremap <leader>= migg=G'i
+nnoremap <silent> <C-w>z :ZoomWin<cr>
