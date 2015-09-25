@@ -3,11 +3,36 @@ autocmd! bufwritepost .vimrc source %
 
 if has("gui_macvim")
   set background=dark
-  colors base16-flat
+endif
+
+let shell_background=$BACKGROUND
+
+set background=dark
+if shell_background == 'light'
+  set background=light
 endif
 
 set nocompatible
 filetype plugin indent on 
+
+set clipboard=unnamed
+
+" Enable per-directory .vimrc files and disable unsafe commands in them
+set exrc
+set secure
+
+" Don’t reset cursor to start of line when moving around.
+"set nostartofline
+
+" Strip trailing whitespace (,ss)
+function! StripWhitespace()
+	let save_cursor = getpos(".")
+	let old_query = getreg('/')
+	:%s/\s\+$//e
+	call setpos('.', save_cursor)
+	call setreg('/', old_query)
+endfunction
+noremap <leader>ss :call StripWhitespace()<CR>
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -62,6 +87,7 @@ let mapleader=","
 "nnoremap ; :
 filetype plugin indent on
 syntax on
+
 set showtabline=1
 set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set hlsearch
@@ -87,7 +113,7 @@ set foldnestmax=10
 set nofoldenable 
 set foldlevel=1
 set ttimeoutlen=50
-set shell=bash\ --login
+set shell=$SHELL
 set backspace=indent,eol,start
 set listchars=tab:▸\ ,eol:¬,nbsp:.      
 set list
@@ -108,13 +134,14 @@ set smartcase
 " Default color scheme
 let base16colorspace=256 " Access colors present in 256 colorspace
 set t_Co=256 " 256 color mode
-set background=dark
+
 colorscheme base16-eighties
 
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
 
+nnoremap <C-S> <C-W>
 " Unmap arrow keys in normal mode
 nnoremap <up> :m-2<CR>
 nnoremap <down> :m+1<CR>
@@ -182,7 +209,9 @@ inoremap <leader>[ []<ESC>i
 "hi Search ctermfg=0 ctermbg=11 guifg=Black 
 "hi LineNr ctermfg=242
 "hi ColorColumn ctermbg=black
-hi CursorLine cterm=NONE ctermbg=239
+if shell_background == 'dark'
+  hi CursorLine cterm=NONE ctermbg=239
+endif
 
 " Toggle cursorline
 nnoremap <Leader>h :set cursorline!<CR>
@@ -247,6 +276,7 @@ xnoremap <leader>/<Space> :call NERDComment(0, "toggle")<CR>
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 autocmd BufNewFile,BufRead Gemfile set filetype=ruby
 autocmd BufNewFile,BufRead Berksfile set filetype=ruby
+autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 
 nnoremap <leader>a :Ag 
 
@@ -266,7 +296,7 @@ function! s:ExecuteInShell(command)
   echo 'Shell command ' . command . ' executed.'
 endfunction
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-nnoremap <C-q> :call <SID>ExecuteInShell(getline('.'))<CR>
+nnoremap <C-x> :call <SID>ExecuteInShell(getline('.'))<CR>
 
 " http://stackoverflow.com/a/9528322
 " Save your backups to a less annoying place than the current directory.
